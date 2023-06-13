@@ -1,95 +1,35 @@
-import Image from 'next/image'
-import styles from './page.module.css'
-
+import * as d3 from 'd3';
+import fs from 'fs';
+import path from 'path';
+import Index from './index';
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+	const dir = 'D:\\学习\\可视化\\实验\\final\\src\\data';
+	const paths = path.join(dir, 'gdppercapita_us_inflation_adjusted.csv');
+	const PublicPath = 'D:\\学习\\可视化\\实验\\final\\public';
+	const csv = fs.readFileSync(paths).toString();
+	const datas = d3.csvParse(csv);
+	const geojson = fs.readFileSync(path.join(dir, 'country.json')).toString();
+	const geo = JSON.parse(geojson);
+	const weather = fs
+		.readFileSync(path.join(PublicPath, '201812\\2018120100.csv'))
+		.toString();
+	const weatherData = d3.csvParse(weather);
+	const city = fs
+		.readFileSync(path.join(PublicPath, '\\year\\2018-上海.csv'))
+		.toString();
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+	// console.log(weatherData.columns);
+	return (
+		<>
+			{/* <Chart datas={datas}></Chart> */}
+			{/* <Geo dispatch={dispatch} datas={geo} weather={weatherData}></Geo> */}
+			
+			<Index
+				columns={weatherData.columns.slice(2, weatherData.columns.length - 2)}
+				datas={geo}
+				city={d3.csvParse(city)}
+				weather={weatherData}
+			></Index>
+		</>
+	);
 }
