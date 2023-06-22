@@ -11,7 +11,7 @@ export default function Home() {
 	const geojson = fs.readFileSync(path.join(dir, 'country.json')).toString();
 	const geo = JSON.parse(geojson);
 	const weather = fs
-		.readFileSync(path.join(PublicPath, '201812\\2018120100.csv'))
+		.readFileSync(path.join(PublicPath, '201801\\2018010100.csv'))
 		.toString();
 	const weatherData = d3.csvParse(weather);
 	const city = fs

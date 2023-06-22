@@ -228,7 +228,7 @@ const getOption = (datas: any) => {
 	const option = {
 		color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
 		title: {
-			text: 'Gradient Stacked Area Chart',
+			text: '污染物浓度堆叠图',
 		},
 		tooltip: {
 			trigger: 'axis',

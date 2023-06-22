@@ -20,7 +20,7 @@ dayjs.extend(customParseFormat);
 // eslint-disable-next-line arrow-body-style
 const disabledDate: RangePickerProps['disabledDate'] = (current) => {
 	// Can not select days before today and today
-	const start = dayjs('2018-12-01', 'YYYY-MM-DD');
+	const start = dayjs('2018-01-01', 'YYYY-MM-DD');
 	const end = dayjs('2018-12-31', 'YYYY-MM-DD');
 	return (
 		(current && current > end.endOf('day')) || current < start.startOf('day')
@@ -29,7 +29,7 @@ const disabledDate: RangePickerProps['disabledDate'] = (current) => {
 
 const Index = ({ datas, weather, city, columns }: Props) => {
 	const dispatch = d3.dispatch('update');
-	const [date, setDate] = useState(dayjs('2018-12-01', 'YYYY-MM-DD'));
+	const [date, setDate] = useState(dayjs('2018-01-01', 'YYYY-MM-DD'));
 	const handleChange = (value: any, type: 'date' | 'type') => {
 		stateRef.current[type] = value;
 		if (type == 'date') setDate(value);
@@ -66,7 +66,7 @@ const Index = ({ datas, weather, city, columns }: Props) => {
 	const [text, setText] = useState('播放');
 	const stateRef = useRef({
 		type: columns[0],
-		date: dayjs('2018-12-01', 'YYYY-MM-DD'),
+		date: dayjs('2018-01-01', 'YYYY-MM-DD'),
 	});
 	const [area, setArea] = useState('');
 	return (
@@ -83,7 +83,7 @@ const Index = ({ datas, weather, city, columns }: Props) => {
 					value={date}
 					onChange={(v) => handleChange(v, 'date')}
 					disabledDate={disabledDate}
-					defaultValue={dayjs('2018-12-01', 'YYYY-MM-DD')}
+					defaultValue={dayjs('2018-01-01', 'YYYY-MM-DD')}
 				/>
 				<Button onClick={handlePlay}>{text}</Button>
 			</div>
