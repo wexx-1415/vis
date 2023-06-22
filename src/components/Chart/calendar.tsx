@@ -25,6 +25,8 @@ export default function Calendar({
 	// const stateRef = useRef({
 	width = width || 1500;
 	height = height || 500;
+	// This code creates a calendar chart. It uses d3.js to render the chart.
+
 	const update = useCallback(
 		(name: string, data?: any) => {
 			data = data || datas;
@@ -55,6 +57,7 @@ export default function Calendar({
 				update(value);
 			}
 		});
+		// 绘制矩形
 		svg
 			.selectAll('rect')
 			.data(datas)
@@ -85,6 +88,7 @@ export default function Calendar({
 				dispatch.call('update', null, { type: 'date', value: d.date });
 			});
 		svg.style('overflow', 'visible');
+		// 添加标题
 		svg
 			.append('text')
 			.text('全国污染物浓度日历图')

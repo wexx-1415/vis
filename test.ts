@@ -22,11 +22,9 @@ json.forEach((e) => {
 		(item) => item.province === e.province && item.month === e.month
 	);
 	if (index === -1) {
-		// delete e['province'];
 		delete e['city'];
 		tjson.push(e);
 	} else {
-		// delete e['province'];
 		delete e['city'];
 		for (let key in e) {
 			if (key !== 'area' && key !== 'month' && key !== 'province') {

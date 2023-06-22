@@ -124,9 +124,6 @@ def get_month_city(month):
       df=pd.read_csv(_dir+"\\"+file)
       continue
     ndf=pd.read_csv(_dir+"\\"+file)
-    # if not df.columns.tolist().__contains__("city") or not ndf.columns.tolist().__contains__("city"):
-    #   print(file)
-    #   os._exit(0)
     df=pd.merge(df,ndf,how="outer")
     df=df.groupby(["province","city"]).mean().round(3).reset_index()
   path="D:\\学习\\可视化\\实验\\final\\public\\2018"

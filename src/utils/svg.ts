@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 import * as d3 from "d3";
 const getData = async (date: dayjs.Dayjs) => {
-	// console.log(date.format('YYYYMMDD00'));
 	const data = await d3.csv(
 		`/${date.format('YYYYMM')}/${date.format('YYYYMMDD00')}.csv`
 	);
